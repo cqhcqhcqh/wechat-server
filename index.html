@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>分享测试</title>
+  </head>
+  <body>
+    <h1>分享测试</h1>
+    <button onclick="shareToTimeline()">分享到朋友圈2222</button>
+    <button onclick="shareToFriend()">分享给好友222</button>
+
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script>
+      // 请求后端接口获取 wx.config 需要的信息
+    const url = window.location.href;
+    fetch(`/wechat/config?url=${url}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // 可以在请求参数中传递当前页面的 URL，以便后端可以根据不同的 URL 生成不同的 wx.config 配置
+      // params: {
+      //   url: window.location.href
+      // }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // 使用获取到的 wx.config 配置进行初始化
+      console.log(`=======signature ${data.signature} timestamp ${data.timestamp} appID ${data.appId} nonceStr ${data.nonceStr}`);
+      wx.config({
+        debug: true,
+        appId: data.appId,
+        timestamp: data.timestamp,
+        nonceStr: data.nonceStr,
+        signature: data.signature,
+        jsApiList: [
+          // 需要使用的微信 JS 接口列表
+          'updateAppMessageShareData',
+          'updateTimelineShareData',
+        ]
+      });
+    })
+    .catch(error => console.error(error));
+      wx.ready(function () {
+        wx.updateAppMessageShareData({
+          title: '测试分享标题',
+          desc: '测试分享描述',
+          link: 'https://166b60c1.r10.cpolar.top/home',
+          imgUrl: 'http://166b60c1.r10.cpolar.top/test.png',
+          success: function () {
+            alert('分享成功');
+          }
+        });
+        wx.updateTimelineShareData({
+          title: '测试分享标题',
+          link: 'https://166b60c1.r10.cpolar.top/home',
+          imgUrl: 'http://166b60c1.r10.cpolar.top/test.png',
+          success: function () {
+            alert('分享成功');
+          }
+        });
+      });
+
+      function shareToTimeline() {
+        wx.updateTimelineShareData({
+          title: '测试分享标题',
+          link: 'https://166b60c1.r10.cpolar.top/home',
+          imgUrl: 'http://166b60c1.r10.cpolar.top/test.png',
+          success: function () {
+            alert('分享成功');
+          }
+        });
+      }
+
+      function shareToFriend() {
+        wx.updateAppMessageShareData({
+          title: '测试分享标题',
+          desc: '测试分享描述',
+          link: 'https://166b60c1.r10.cpolar.top/home',
+          imgUrl: 'http://166b60c1.r10.cpolar.top/test.png',
+          success: function () {
+            alert('分享成功');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
