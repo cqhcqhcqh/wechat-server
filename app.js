@@ -93,7 +93,7 @@ const menuUrl = `https://api.weixin.qq.com/cgi-bin/menu/create?access_token=`;
 
 // 获取 access_token 的接口地址
 const tokenUrl = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appID}&secret=${appSecret}`;
-const baseUrl = "https://166b60c1.r10.cpolar.top";
+const baseUrl = "https://1bab1162.r10.cpolar.top";
 // 定义菜单配置
 const menuConfig = {
   "button": [
@@ -197,7 +197,7 @@ function getSignature(jsapiTicket, url) {
   const signature = crypto.createHash('sha1').update(str).digest('hex');
   console.log(`signature ${signature} timestamp ${timestamp} appID ${appID} nonceStr ${nonceStr} url ${url}`);
   return {
-    appId: 'wxff7a58ea8fe7894e', // 替换成实际的 appId
+    appId: appID, // 替换成实际的 appId
     timestamp: timestamp,
     nonceStr: nonceStr,
     signature: signature

@@ -12,6 +12,7 @@
     <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script>
       // 请求后端接口获取 wx.config 需要的信息
+    const baseUrl = "https://1bab1162.r10.cpolar.top";
     const url = window.location.href;
     fetch(`/wechat/config?url=${url}`, {
       method: 'GET',
@@ -45,16 +46,16 @@
         wx.updateAppMessageShareData({
           title: '测试分享标题',
           desc: '测试分享描述',
-          link: 'https://166b60c1.r10.cpolar.top/home',
-          imgUrl: 'http://166b60c1.r10.cpolar.top/test.png',
+          link: `${baseUrl}/home`,
+          imgUrl: `${baseUrl}/test.png`,
           success: function () {
             alert('分享成功');
           }
         });
         wx.updateTimelineShareData({
           title: '测试分享标题',
-          link: 'https://166b60c1.r10.cpolar.top/home',
-          imgUrl: 'http://166b60c1.r10.cpolar.top/test.png',
+          link: `${baseUrl}/home`,
+          imgUrl: `${baseUrl}/test.png`,
           success: function () {
             alert('分享成功');
           }
@@ -64,8 +65,8 @@
       function shareToTimeline() {
         wx.updateTimelineShareData({
           title: '测试分享标题',
-          link: 'https://166b60c1.r10.cpolar.top/home',
-          imgUrl: 'http://166b60c1.r10.cpolar.top/test.png',
+          link: `${baseUrl}/home`,
+          imgUrl: `${baseUrl}/test.png`,
           success: function () {
             alert('分享成功');
           }
@@ -76,8 +77,8 @@
         wx.updateAppMessageShareData({
           title: '测试分享标题',
           desc: '测试分享描述',
-          link: 'https://166b60c1.r10.cpolar.top/home',
-          imgUrl: 'http://166b60c1.r10.cpolar.top/test.png',
+          link: `${baseUrl}/home`,
+          imgUrl: `${baseUrl}/test.png`,
           success: function () {
             alert('分享成功');
           }
